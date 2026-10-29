@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SplashScreen } from 'expo-router';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Appearance } from 'react-native';
 
@@ -13,6 +14,9 @@ type PreferencesContextValue = Preferences & {
   setLocation: (location: Location | null) => void;
 };
 
+// Splash ostaje vidljiv dok se postavke ne učitaju; ne smijemo vraćati null iz root layouta.
+SplashScreen.preventAutoHideAsync();
+
 const STORAGE_KEY = 'znamjato:preferences:v1';
 const defaults: Preferences = { theme: 'system', location: null };
 
@@ -23,7 +27,6 @@ const applyTheme = (theme: ThemePreference) =>
 
 export function PreferencesProvider({ children }: { children: React.ReactNode }) {
   const [prefs, setPrefs] = useState<Preferences>(defaults);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     AsyncStorage.getItem(STORAGE_KEY)
@@ -34,7 +37,7 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
         setPrefs(saved);
       })
       .catch(() => {})
-      .finally(() => setLoaded(true));
+      .finally(() => SplashScreen.hide());
   }, []);
 
   const update = useCallback((patch: Partial<Preferences>) => {
@@ -56,9 +59,6 @@ export function PreferencesProvider({ children }: { children: React.ReactNode })
     }),
     [prefs, update],
   );
-
-  // Ne prikazuj aplikaciju dok se postavke ne učitaju, da tema ne "trepne".
-  if (!loaded) return null;
 
   return <PreferencesContext.Provider value={value}>{children}</PreferencesContext.Provider>;
 }
