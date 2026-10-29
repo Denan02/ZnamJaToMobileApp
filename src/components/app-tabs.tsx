@@ -9,23 +9,33 @@ export default function AppTabs() {
 
   return (
     <NativeTabs
-      backgroundColor={colors.background}
-      indicatorColor={colors.backgroundElement}
-      labelStyle={{ selected: { color: colors.text } }}>
+      backgroundColor={colors.backgroundElement}
+      indicatorColor={colors.backgroundSelected}
+      tintColor={colors.primary}
+      labelStyle={{ selected: { color: colors.primary } }}>
       <NativeTabs.Trigger name="index">
-        <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/home.png')}
-          renderingMode="template"
-        />
+        <NativeTabs.Trigger.Label>Početna</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf={{ default: 'house', selected: 'house.fill' }} md="home" />
       </NativeTabs.Trigger>
 
-      <NativeTabs.Trigger name="explore">
-        <NativeTabs.Trigger.Label>Explore</NativeTabs.Trigger.Label>
-        <NativeTabs.Trigger.Icon
-          src={require('@/assets/images/tabIcons/explore.png')}
-          renderingMode="template"
-        />
+      <NativeTabs.Trigger name="clanci">
+        <NativeTabs.Trigger.Label>Članci</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf={{ default: 'doc.text', selected: 'doc.text.fill' }} md="article" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="alati">
+        <NativeTabs.Trigger.Label>Alati</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="wrench.and.screwdriver" md="build" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="servisi">
+        <NativeTabs.Trigger.Label>Servisi</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf="antenna.radiowaves.left.and.right" md="sensors" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="postavke">
+        <NativeTabs.Trigger.Label>Postavke</NativeTabs.Trigger.Label>
+        <NativeTabs.Trigger.Icon sf={{ default: 'gearshape', selected: 'gearshape.fill' }} md="settings" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );

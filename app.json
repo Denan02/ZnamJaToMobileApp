@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "NSIMobile",
+    "name": "ZnamJaTo",
     "slug": "NSIMobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -28,7 +28,7 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#0F2A49",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
